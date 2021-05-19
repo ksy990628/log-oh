@@ -18,7 +18,7 @@
     "rootDir": ".",
     "paths": {
       "@components/*": ["src/components/*"],
-      "@colors": ["src/components/atoms/Colors"]
+      "@colors": ["src/constants/colors"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
