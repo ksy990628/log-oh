@@ -21,7 +21,7 @@
         "root": ["./"],
         "alias": {
           "@components": "./src/components",
-          "@colors": "./src/components/atoms/Colors"
+          "@colors": "./src/constants/colors"
         }
       }
     ]
