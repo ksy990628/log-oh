@@ -2,7 +2,7 @@ import React from "react";
 
 import { IconProps } from "./icons";
 
-function MenuIcon({ style, fill }: IconProps) {
+function CalendarIcon({ style, fill }: IconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -14,11 +14,12 @@ function MenuIcon({ style, fill }: IconProps) {
       strokeWidth="2"
       viewBox="0 0 24 24"
     >
-      <path d="M3 12L21 12"></path>
-      <path d="M3 6L21 6"></path>
-      <path d="M3 18L21 18"></path>
+      <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+      <path d="M16 2L16 6"></path>
+      <path d="M8 2L8 6"></path>
+      <path d="M3 10L21 10"></path>
     </svg>
   );
 }
 
-export default React.memo(MenuIcon);
+export default React.memo(CalendarIcon);
