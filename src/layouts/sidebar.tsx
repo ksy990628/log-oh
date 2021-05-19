@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-import { WHITE } from "src/constants/colors";
+import { WHITE } from "@colors";
+import SidebarMenus from "src/components/sidebar";
 
 export type GlobalSidebarProps = {
   isOpen: boolean;
@@ -14,7 +15,9 @@ export default function GlobalSidebar({
   return (
     <Overlay isOpen={isOpen}>
       <Space onClick={toggleSidebar} />
-      <Wrapper isOpen={isOpen}></Wrapper>
+      <Wrapper isOpen={isOpen}>
+        <SidebarMenus toggleSidebar={toggleSidebar} />
+      </Wrapper>
     </Overlay>
   );
 }
