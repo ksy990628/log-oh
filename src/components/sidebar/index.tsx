@@ -34,6 +34,11 @@ export default function Sidebar({ toggleSidebar }: SidebarProps) {
         link="/friends"
         text="Add friends"
       />
+      <Menu
+        Icon={<UserPlusIcon style={style} fill={BLACK} />}
+        link="/register"
+        text="Register a New To-do"
+      />
     </Wrapper>
   );
 }
