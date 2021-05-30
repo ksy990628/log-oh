@@ -5,7 +5,7 @@ type ColorSelectProps = {
 };
 
 export default function ColorSelect({ handleColorChange }: ColorSelectProps) {
-  const OPTIONS = ["red", "orange", "yellow", "green", "blue", "purple"];
+  const OPTIONS = ["red", "orange", "green", "blue", "purple", "black"];
 
   return (
     <InputGroup>
