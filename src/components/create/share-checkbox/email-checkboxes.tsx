@@ -22,6 +22,8 @@ export default function EmailCheckboxes() {
 
 const ContentWrapper = styled.div`
   width: 100%;
+  max-height: 20em;
+  overflow-x: scroll;
   display: flex;
   flex-direction: column;
   padding: 5rem 1.6rem 0.4rem 1.6rem;
