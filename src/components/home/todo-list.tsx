@@ -17,7 +17,7 @@ function ToDoList() {
     list.length > 0
       ? list.map((item: TodoItemType, index: number) => (
           <TodoItem
-            key={index + item.task}
+            key={item.task + item.deadline}
             index={index}
             {...item}
             reload={reload}
