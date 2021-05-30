@@ -5,7 +5,12 @@ export default function PriorityRadiogroup() {
 
   const RadioItem = (value) => (
     <RadioWrapper key={value}>
-      <RadioInput type="radio" value={value} id={value} />
+      <RadioInput
+        type="radio"
+        value={value}
+        id={value}
+        defaultChecked={value === "1"}
+      />
       <RadioLabel htmlFor={value}>{value}</RadioLabel>
     </RadioWrapper>
   );
