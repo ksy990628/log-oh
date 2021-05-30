@@ -1,19 +1,36 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 import { WHITE, GREEN } from "src/constants/colors";
 import MenuIcon from "src/assets/icons/menu";
+import GoBackIcon from "src/assets/icons/chevron/left";
 
 export type GlobalHeaderProps = {
   toggleSidebar: () => void;
 };
 
 export default function GlobalHeader({ toggleSidebar }: GlobalHeaderProps) {
+  const router = useRouter();
+  const { pathname } = router;
+
+  const GoBackButton = (
+    <Button onClick={router.back}>
+      <GoBackIcon fill={WHITE} style={{ width: "2rem", height: "2rem" }} />
+    </Button>
+  );
+
+  const MenuButton = (
+    <Button onClick={toggleSidebar}>
+      <MenuIcon fill={WHITE} style={{ width: "2rem", height: "2rem" }} />
+    </Button>
+  );
+
+  const isCreateTodo = pathname === "/create";
+
   return (
     <Wrapper>
-      <Button onClick={toggleSidebar}>
-        <MenuIcon fill={WHITE} style={{ width: "2rem", height: "2rem" }} />
-      </Button>
+      {isCreateTodo ? GoBackButton : MenuButton}
       <Link href="/" passHref>
         <A>
           <Title>Log - Oh</Title>
