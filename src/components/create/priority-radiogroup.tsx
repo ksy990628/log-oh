@@ -1,26 +1,33 @@
 import styled from "styled-components";
 
-export default function PriorityRadiogroup() {
+type PriorityRadiogroupProps = {
+  checkedValue: string;
+  handlePriorityChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export default function PriorityRadiogroup({
+  checkedValue,
+  handlePriorityChange,
+}: PriorityRadiogroupProps) {
   const OPTIONS = ["1", "2", "3", "4", "5"];
 
-  const RadioItem = (value) => (
+  const renderRadioItems = OPTIONS.map((value) => (
     <RadioWrapper key={value}>
       <RadioInput
         type="radio"
         value={value}
         id={value}
-        defaultChecked={value === "1"}
+        checked={value === checkedValue}
+        onChange={handlePriorityChange}
       />
       <RadioLabel htmlFor={value}>{value}</RadioLabel>
     </RadioWrapper>
-  );
+  ));
 
   return (
     <InputGroup>
       <Label htmlFor="priority">Priority</Label>
-      <RadioGroupWrapper>
-        {OPTIONS.map((value) => RadioItem(value))}
-      </RadioGroupWrapper>
+      <RadioGroupWrapper>{renderRadioItems}</RadioGroupWrapper>
     </InputGroup>
   );
 }

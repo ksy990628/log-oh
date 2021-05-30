@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 import { GREEN, WHITE } from "@colors";
@@ -6,20 +8,94 @@ import ColorSelect from "./color-select";
 import ShareCheckbox from "./share-checkbox";
 
 export default function CreateToDo() {
+  const [task, setTask] = useState<string>("");
+  const [deadline, setDeadline] = useState<string>("");
+  const [priority, setPriority] = useState<string>("1");
+  const [color, setColor] = useState<string>("red");
+  const [emailList, setEmailList] = useState<Set<string>>(new Set());
+  const [isDone, setIsDone] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const data = {
+      task,
+      deadline,
+      priority,
+      color,
+      emailList: Array.from(emailList),
+      isDone,
+    };
+
+    const list = JSON.parse(localStorage.getItem("toDoList") || "[]");
+
+    if (router.query.id) {
+      const id = router.query.id.toString();
+      list[id] = data;
+      localStorage.setItem("toDoList", JSON.stringify(list));
+    } else {
+      localStorage.setItem("toDoList", JSON.stringify([...list, data]));
+    }
+    router.push("/");
+  };
+
+  const handleTaskChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTask(event.target.value);
+  };
+
+  const handleDeadlineChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDeadline(event.target.value);
+  };
+
+  const handlePriorityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPriority(event.currentTarget.value);
+  };
+
+  const handleColorChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setColor(event.target.value);
+  };
+
+  const handleEmailListChange = (email: string, isChecked: boolean) => {
+    if (isChecked) {
+      emailList.add(email);
+      setEmailList(emailList);
+    } else if (!isChecked && emailList.has(email)) {
+      emailList.delete(email);
+      setEmailList(emailList);
+    }
+  };
+
   return (
     <Wrapper>
-      <StyledForm>
+      <StyledForm onSubmit={handleSubmit}>
         <InputGroup>
           <Label htmlFor="todo">To Do</Label>
-          <TaskInput type="text" id="todo" required />
+          <TaskInput
+            type="text"
+            id="todo"
+            value={task}
+            onChange={handleTaskChange}
+            required
+          />
         </InputGroup>
         <InputGroup>
           <Label htmlFor="deadline">Deadline</Label>
-          <DateInput type="date" id="deadline" required />
+          <DateInput
+            type="date"
+            id="deadline"
+            value={deadline}
+            onChange={handleDeadlineChange}
+            required
+          />
         </InputGroup>
-        <PriorityRadiogroup />
-        <ColorSelect />
-        <ShareCheckbox />
+        <PriorityRadiogroup
+          checkedValue={priority}
+          handlePriorityChange={handlePriorityChange}
+        />
+        <ColorSelect handleColorChange={handleColorChange} />
+        <ShareCheckbox handleEmailListChange={handleEmailListChange} />
         <SaveButton type="submit">Save</SaveButton>
       </StyledForm>
     </Wrapper>

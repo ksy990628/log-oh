@@ -1,6 +1,13 @@
+import { WHITE } from "@colors";
 import styled from "styled-components";
 
-export default function EmailCheckboxes() {
+import Email from "./email";
+
+export default function EmailCheckboxes({
+  handleEmailListChange,
+}: {
+  handleEmailListChange: (email: string, isChecked: boolean) => void;
+}) {
   const EMAILS = [
     "example1@example.com",
     "example2@example.com",
@@ -11,10 +18,11 @@ export default function EmailCheckboxes() {
   return (
     <ContentWrapper>
       {EMAILS.map((value) => (
-        <CheckboxWrapper key={value}>
-          <Checkbox type="checkbox" id={value} value={value} />
-          <Label htmlFor={value}>{value}</Label>
-        </CheckboxWrapper>
+        <Email
+          key={value}
+          value={value}
+          handleEmailListChange={handleEmailListChange}
+        />
       ))}
     </ContentWrapper>
   );
@@ -22,25 +30,10 @@ export default function EmailCheckboxes() {
 
 const ContentWrapper = styled.div`
   width: 100%;
-  max-height: 20em;
-  overflow-x: scroll;
+  max-height: 20rem;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   padding: 5rem 1.6rem 0.4rem 1.6rem;
-`;
-
-const CheckboxWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-`;
-
-const Label = styled.label`
-  font-size: 1.2rem;
-`;
-
-const Checkbox = styled.input`
-  width: 1.2rem;
-  height: 1.2rem;
-  margin-right: 0.8rem;
+  background-color: ${WHITE};
 `;

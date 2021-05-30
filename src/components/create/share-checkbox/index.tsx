@@ -5,7 +5,11 @@ import { GREEN } from "@colors";
 import Header from "./header";
 import EmailCheckboxes from "./email-checkboxes";
 
-export default function ShareCheckbox() {
+export default function ShareCheckbox({
+  handleEmailListChange,
+}: {
+  handleEmailListChange: (email: string, isChecked: boolean) => void;
+}) {
   const [isOpened, setIsOpened] = useState<boolean>(true);
 
   const toggleOpened = () => {
@@ -19,7 +23,9 @@ export default function ShareCheckbox() {
         isOpened={isOpened}
         toggleOpened={toggleOpened}
       />
-      {isOpened && <EmailCheckboxes />}
+      {isOpened && (
+        <EmailCheckboxes handleEmailListChange={handleEmailListChange} />
+      )}
     </Wrapper>
   );
 }

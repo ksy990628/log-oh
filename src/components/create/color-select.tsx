@@ -1,16 +1,21 @@
 import styled from "styled-components";
 
-export default function ColorSelect() {
+type ColorSelectProps = {
+  handleColorChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+};
+
+export default function ColorSelect({ handleColorChange }: ColorSelectProps) {
+  const OPTIONS = ["red", "orange", "yellow", "green", "blue", "purple"];
+
   return (
     <InputGroup>
       <Label htmlFor="color">Color</Label>
-      <Select id="color">
-        <Option value="red">red</Option>
-        <Option value="orange">orange</Option>
-        <Option value="yellow">yellow</Option>
-        <Option value="green">green</Option>
-        <Option value="blue">blue</Option>
-        <Option value="grey">grey</Option>
+      <Select id="color" onChange={handleColorChange}>
+        {OPTIONS.map((value) => (
+          <Option key={value} value={value}>
+            {value}
+          </Option>
+        ))}
       </Select>
     </InputGroup>
   );
