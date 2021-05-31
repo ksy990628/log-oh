@@ -45,7 +45,7 @@ const Input = styled.input`
   border: none;
   padding: unset;
   box-sizing: border-box;
-  width: 7.4rem;
+  width: 10rem;
   outline: none;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 1.2rem;
@@ -69,7 +69,7 @@ const Wrapper = styled.div`
   background-color: ${GREY[300]};
   align-items: center;
   border: 1.2px solid ${GREY[500]};
-  padding: 0.4rem 0.8rem 0.4rem 0.8rem;
+  padding: 0.4rem 0.8rem;
   display: flex;
   flex-direction: row;
 `;
