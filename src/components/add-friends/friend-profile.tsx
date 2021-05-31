@@ -19,10 +19,12 @@ export default function UserProfile({
   setReload,
 }: ProfileProps) {
   const deleteItem = () => {
-    const list = JSON.parse(localStorage.getItem("friendsList") || "[]");
-    list.splice(index, 1);
-    localStorage.setItem("friendsList", JSON.stringify(list));
-    setReload(reload + 1);
+    if (window.confirm("Are you sure you want to delete?")) {
+      const list = JSON.parse(localStorage.getItem("friendsList") || "[]");
+      list.splice(index, 1);
+      localStorage.setItem("friendsList", JSON.stringify(list));
+      setReload(reload + 1);
+    }
   };
 
   return (
