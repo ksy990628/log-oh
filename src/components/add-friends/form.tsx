@@ -15,10 +15,18 @@ export default function AddFriendForm({ reload, setReload }: FormProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const list = JSON.parse(localStorage.getItem("friendsList") || "[]");
+
+    const result = list.filter((item) => item.email === email);
+    if (result.length > 0) {
+      alert("This email is already registered.");
+      return;
+    }
+
     localStorage.setItem(
       "friendsList",
       JSON.stringify([...list, { name, email }])
     );
+
     setName("");
     setEmail("");
     alert("A new friend has been registered.");
