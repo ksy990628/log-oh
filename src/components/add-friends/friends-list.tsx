@@ -3,7 +3,6 @@ import Profile from "./friend-profile";
 
 type ListProps = {
   list: UserTypes[];
-
   reload: number;
   setReload: React.Dispatch<React.SetStateAction<number>>;
 };
