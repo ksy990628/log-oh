@@ -2,23 +2,25 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { TodoItem as TodoItemType } from "src/types/todo-item";
+import Search from "./search";
 import TodoItem from "./todo-item";
 
 function ToDoList() {
-  const [list, setList] = useState([]);
-  const [reload, setReload] = useState(0);
+  const [query, setQuery] = useState<string>("");
+  const [list, setList] = useState<TodoItemType[]>([]);
+  const [reload, setReload] = useState<number>(0);
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("toDoList") || "[]");
     setList(data);
-  }, [reload]);
+  }, [reload, query]);
 
   const renderItems =
     list.length > 0
-      ? list.map((item: TodoItemType, index: number) => (
+      ? list.map((item: TodoItemType) => (
           <TodoItem
-            key={item.task + item.deadline}
-            index={index}
+            key={item.id}
+            id={item.id}
             {...item}
             reload={reload}
             setReload={setReload}
@@ -26,7 +28,14 @@ function ToDoList() {
         ))
       : "Register new to-do!";
 
-  return <Wrapper>{renderItems}</Wrapper>;
+  return (
+    <Wrapper>
+      <ControlWrapper>
+        <Search setQuery={setQuery} />
+      </ControlWrapper>
+      {renderItems}
+    </Wrapper>
+  );
 }
 
 export default ToDoList;
@@ -34,4 +43,11 @@ export default ToDoList;
 const Wrapper = styled.div`
   width: 100%;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ControlWrapper = styled.div`
+  display: flex;
+  margin-bottom: 2rem;
 `;
