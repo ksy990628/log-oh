@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
+import { LIME } from "@colors";
 import { TodoItem as TodoItemType } from "src/types/todo-item";
 import Search from "./search";
 import Filter from "./filter";
@@ -49,17 +50,22 @@ function ToDoList() {
   };
 
   const renderItems =
-    list.length > 0
-      ? list.map((item: TodoItemType) => (
-          <TodoItem
-            key={item.id}
-            id={item.id}
-            {...item}
-            reload={reload}
-            setReload={setReload}
-          ></TodoItem>
-        ))
-      : "Register new to-do!";
+    list.length > 0 ? (
+      list.map((item: TodoItemType) => (
+        <TodoItem
+          key={item.id}
+          id={item.id}
+          {...item}
+          reload={reload}
+          setReload={setReload}
+        ></TodoItem>
+      ))
+    ) : (
+      <InfoWrapper>
+        <Info>📝 Register new to-do 📝</Info>
+        <Info>(Plus Button Below)</Info>
+      </InfoWrapper>
+    );
 
   return (
     <Wrapper>
@@ -85,4 +91,18 @@ const ControlWrapper = styled.div`
   display: flex;
   margin-bottom: 2rem;
   justify-content: space-between;
+`;
+
+const InfoWrapper = styled.div`
+  background-color: ${LIME};
+  border-radius: 1rem;
+  margin: 2rem 0;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const Info = styled.p`
+  font-size: 1.4rem;
 `;
