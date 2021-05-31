@@ -20,7 +20,6 @@
       {
         "root": ["./"],
         "alias": {
-          "@components": "./src/components",
           "@colors": "./src/constants/colors"
         }
       }

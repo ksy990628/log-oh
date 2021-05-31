@@ -31,10 +31,12 @@ function ToDoItem(props: ToDoItemProps) {
   };
 
   const deleteItem = () => {
-    const list = JSON.parse(localStorage.getItem("toDoList") || "[]");
-    list.splice(index, 1);
-    localStorage.setItem("toDoList", JSON.stringify(list));
-    setReload(reload + 1);
+    if (window.confirm("Are you sure you want to delete?")) {
+      const list = JSON.parse(localStorage.getItem("toDoList") || "[]");
+      list.splice(index, 1);
+      localStorage.setItem("toDoList", JSON.stringify(list));
+      setReload(reload + 1);
+    }
   };
 
   return (

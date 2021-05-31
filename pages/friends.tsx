@@ -1,5 +1,10 @@
 import Layout from "src/layouts";
+import AddFriendsComponents from "src/components/add-friends";
 
-export default function Calendar() {
-  return <Layout>Add friends</Layout>;
+export default function AddFriends() {
+  return (
+    <Layout>
+      <AddFriendsComponents />
+    </Layout>
+  );
 }
