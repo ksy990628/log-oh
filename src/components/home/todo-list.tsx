@@ -3,10 +3,12 @@ import styled from "styled-components";
 
 import { TodoItem as TodoItemType } from "src/types/todo-item";
 import Search from "./search";
+import Filter from "./filter";
 import TodoItem from "./todo-item";
 
 function ToDoList() {
   const [query, setQuery] = useState<string>("");
+  const [sorting, setSorting] = useState<string>("highPriority");
   const [list, setList] = useState<TodoItemType[]>([]);
   const [reload, setReload] = useState<number>(0);
 
@@ -14,14 +16,37 @@ function ToDoList() {
     let data: Array<TodoItemType> = Array.from(
       JSON.parse(localStorage.getItem("toDoList") || "[]")
     );
-
     // search
     if (query !== "") {
       data = data.filter((item) => item.task === query);
     }
+    // sorting
+    if (sorting === "highPriority") {
+      const compareFunction = (a: TodoItemType, b: TodoItemType) =>
+        parseInt(b.priority, 10) - parseInt(a.priority, 10);
+      data = data.sort(compareFunction);
+    } else if (sorting === "lowPriority") {
+      const compareFunction = (a: TodoItemType, b: TodoItemType) =>
+        parseInt(a.priority, 10) - parseInt(b.priority, 10);
+      data = data.sort(compareFunction);
+    } else if (sorting === "earlyDeadline") {
+      const compareFunction = (a: TodoItemType, b: TodoItemType) =>
+        parseInt(a.deadline.replaceAll("-", ""), 10) -
+        parseInt(b.deadline.replaceAll("-", ""), 10);
+      data = data.sort(compareFunction);
+    } else if (sorting === "lateDeadline") {
+      const compareFunction = (a: TodoItemType, b: TodoItemType) =>
+        parseInt(b.deadline.replaceAll("-", ""), 10) -
+        parseInt(a.deadline.replaceAll("-", ""), 10);
+      data = data.sort(compareFunction);
+    }
 
     setList(data);
-  }, [reload, query]);
+  }, [reload, query, sorting]);
+
+  const handleSortingChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSorting(event.target.value);
+  };
 
   const renderItems =
     list.length > 0
@@ -40,6 +65,7 @@ function ToDoList() {
     <Wrapper>
       <ControlWrapper>
         <Search setQuery={setQuery} />
+        <Filter handleSortingChange={handleSortingChange} />
       </ControlWrapper>
       {renderItems}
     </Wrapper>
@@ -58,4 +84,5 @@ const Wrapper = styled.div`
 const ControlWrapper = styled.div`
   display: flex;
   margin-bottom: 2rem;
+  justify-content: space-between;
 `;
