@@ -11,7 +11,15 @@ function ToDoList() {
   const [reload, setReload] = useState<number>(0);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("toDoList") || "[]");
+    let data: Array<TodoItemType> = Array.from(
+      JSON.parse(localStorage.getItem("toDoList") || "[]")
+    );
+
+    // search
+    if (query !== "") {
+      data = data.filter((item) => item.task === query);
+    }
+
     setList(data);
   }, [reload, query]);
 

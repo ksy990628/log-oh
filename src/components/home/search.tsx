@@ -12,10 +12,6 @@ export default function Search(props: { setQuery: (query: string) => void }) {
   };
 
   const doSearch = () => {
-    if (keyword === "") {
-      alert("Enter your search terms.");
-      return;
-    }
     props.setQuery(keyword);
   };
 
