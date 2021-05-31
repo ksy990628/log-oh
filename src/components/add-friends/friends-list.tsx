@@ -1,17 +1,14 @@
+import { UserTypes } from "src/types/user";
 import Profile from "./friend-profile";
 
-export default function FriendsList() {
-  const FRIENDS_EXAMPLE = [
-    { name: "example", email: "example@example.com" },
-    { name: "example", email: "example@example.com" },
-    { name: "example", email: "example@example.com" },
-    { name: "example", email: "example@example.com" },
-    { name: "example", email: "example@example.com" },
-  ];
+type ListProps = {
+  list: UserTypes[];
+};
 
+export default function FriendsList({ list }: ListProps) {
   return (
     <>
-      {FRIENDS_EXAMPLE.map((item) => (
+      {list.map((item) => (
         <Profile key={item.email} name={item.name} email={item.email} />
       ))}
     </>

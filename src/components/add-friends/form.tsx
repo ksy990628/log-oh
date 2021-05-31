@@ -3,7 +3,12 @@ import styled from "styled-components";
 
 import { GREEN, LIME, WHITE } from "@colors";
 
-export default function AddFriendForm() {
+type FormProps = {
+  reload: number;
+  setReload: React.Dispatch<React.SetStateAction<number>>;
+};
+
+export default function AddFriendForm({ reload, setReload }: FormProps) {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
 
@@ -17,6 +22,7 @@ export default function AddFriendForm() {
     setName("");
     setEmail("");
     alert("A new friend has been registered.");
+    setReload(reload + 1);
   };
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,15 +1,11 @@
 import styled from "styled-components";
 
 import { GREY } from "@colors";
+import { UserTypes } from "src/types/user";
 import ProfileIcon from "src/assets/icons/profile";
 import XIcon from "src/assets/icons/x";
 
-type ProfileProps = {
-  name: string;
-  email: string;
-};
-
-export default function UserProfile({ name, email }: ProfileProps) {
+export default function UserProfile({ name, email }: UserTypes) {
   return (
     <Wrapper>
       <ContentsWrapper>
@@ -32,7 +28,7 @@ export default function UserProfile({ name, email }: ProfileProps) {
 const Wrapper = styled.div`
   padding: 1rem 3rem;
   display: flex;
-  border-top: 1px solid ${GREY[500]};
+  border-bottom: 1px solid ${GREY[500]};
   justify-content: space-between;
   align-items: center;
 `;
