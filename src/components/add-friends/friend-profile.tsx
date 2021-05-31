@@ -5,7 +5,26 @@ import { UserTypes } from "src/types/user";
 import ProfileIcon from "src/assets/icons/profile";
 import XIcon from "src/assets/icons/x";
 
-export default function UserProfile({ name, email }: UserTypes) {
+type ProfileProps = UserTypes & {
+  index: number;
+  reload: number;
+  setReload: React.Dispatch<React.SetStateAction<number>>;
+};
+
+export default function UserProfile({
+  index,
+  name,
+  email,
+  reload,
+  setReload,
+}: ProfileProps) {
+  const deleteItem = () => {
+    const list = JSON.parse(localStorage.getItem("friendsList") || "[]");
+    list.splice(index, 1);
+    localStorage.setItem("friendsList", JSON.stringify(list));
+    setReload(reload + 1);
+  };
+
   return (
     <Wrapper>
       <ContentsWrapper>
@@ -18,7 +37,7 @@ export default function UserProfile({ name, email }: UserTypes) {
           <UserEmail>{email}</UserEmail>
         </TextWrapper>
       </ContentsWrapper>
-      <DeleteButton>
+      <DeleteButton onClick={deleteItem}>
         <XIcon fill={GREY[500]} style={{ width: "1.6rem", height: "1.6rem" }} />
       </DeleteButton>
     </Wrapper>

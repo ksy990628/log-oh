@@ -16,7 +16,7 @@ export default function AddFriendsComponents() {
     <>
       <UserProfile />
       <AddFriendForm reload={reload} setReload={setReload} />
-      <FriendsList list={list} />
+      <FriendsList list={list} reload={reload} setReload={setReload} />
     </>
   );
 }
