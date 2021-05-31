@@ -1,17 +1,54 @@
-import { GREEN, LIME, WHITE } from "@colors";
+import { useState } from "react";
 import styled from "styled-components";
 
+import { GREEN, LIME, WHITE } from "@colors";
+
 export default function AddFriendForm() {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const list = JSON.parse(localStorage.getItem("friendsList") || "[]");
+    localStorage.setItem(
+      "friendsList",
+      JSON.stringify([...list, { name, email }])
+    );
+    setName("");
+    setEmail("");
+    alert("A new friend has been registered.");
+  };
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <InputWrapper>
         <InputGroup>
           <Label htmlFor="name">Name</Label>
-          <Input type="text" id="name" required />
+          <Input
+            type="text"
+            id="name"
+            value={name}
+            onChange={handleNameChange}
+            required
+          />
         </InputGroup>
         <InputGroup>
           <Label htmlFor="email">Email</Label>
-          <Input type="email" id="email" required />
+          <Input
+            type="email"
+            id="email"
+            value={email}
+            onChange={handleEmailChange}
+            required
+          />
         </InputGroup>
       </InputWrapper>
       <Button type="submit">Add Friend</Button>
