@@ -5,14 +5,13 @@ import { TodoItem as TodoItemType } from "src/types/todo-item";
 import XIcon from "src/assets/icons/x";
 
 type ToDoItemProps = TodoItemType & {
-  index: number;
   reload: number;
   setReload: React.Dispatch<React.SetStateAction<number>>;
 };
 
 function ToDoItem(props: ToDoItemProps) {
   const {
-    index,
+    id,
     task,
     deadline,
     priority,
@@ -24,7 +23,10 @@ function ToDoItem(props: ToDoItemProps) {
   } = props;
 
   const toggleIsDone = () => {
-    const list = JSON.parse(localStorage.getItem("toDoList") || "[]");
+    const list: Array<TodoItemType> = Array.from(
+      JSON.parse(localStorage.getItem("toDoList") || "[]")
+    );
+    const index = list.findIndex((item) => item.id === id);
     list[index].isDone = !list[index].isDone;
     localStorage.setItem("toDoList", JSON.stringify(list));
     setReload(reload + 1);
@@ -33,8 +35,8 @@ function ToDoItem(props: ToDoItemProps) {
   const deleteItem = () => {
     if (window.confirm("Are you sure you want to delete?")) {
       const list = JSON.parse(localStorage.getItem("toDoList") || "[]");
-      list.splice(index, 1);
-      localStorage.setItem("toDoList", JSON.stringify(list));
+      const newList = list.filter((item) => item.id !== id);
+      localStorage.setItem("toDoList", JSON.stringify(newList));
       setReload(reload + 1);
     }
   };

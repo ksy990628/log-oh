@@ -1,4 +1,5 @@
 export type TodoItem = {
+  id: string;
   task: string;
   deadline: string;
   priority: string;

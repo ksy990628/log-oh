@@ -20,7 +20,9 @@ export default function CreateToDo() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    const id = Date.now();
     const data = {
+      id,
       task,
       deadline,
       priority,
@@ -30,14 +32,8 @@ export default function CreateToDo() {
     };
 
     const list = JSON.parse(localStorage.getItem("toDoList") || "[]");
+    localStorage.setItem("toDoList", JSON.stringify([...list, data]));
 
-    if (router.query.id) {
-      const id = router.query.id.toString();
-      list[id] = data;
-      localStorage.setItem("toDoList", JSON.stringify(list));
-    } else {
-      localStorage.setItem("toDoList", JSON.stringify([...list, data]));
-    }
     router.push("/");
   };
 
