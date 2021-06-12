@@ -23,9 +23,11 @@ export default function ShareCheckbox({
         isOpened={isOpened}
         toggleOpened={toggleOpened}
       />
-      {isOpened && (
-        <EmailCheckboxes handleEmailListChange={handleEmailListChange} />
-      )}
+
+      <EmailCheckboxes
+        isOpened={isOpened}
+        handleEmailListChange={handleEmailListChange}
+      />
     </Wrapper>
   );
 }

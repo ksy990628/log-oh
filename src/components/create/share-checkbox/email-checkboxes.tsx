@@ -6,8 +6,10 @@ import { UserTypes } from "src/types/user";
 import Email from "./email";
 
 export default function EmailCheckboxes({
+  isOpened,
   handleEmailListChange,
 }: {
+  isOpened: boolean;
   handleEmailListChange: (email: string, isChecked: boolean) => void;
 }) {
   const [emailList, setEmailList] = useState<UserTypes[]>([]);
@@ -18,7 +20,7 @@ export default function EmailCheckboxes({
   }, []);
 
   return (
-    <ContentWrapper>
+    <ContentWrapper isOpened={isOpened}>
       {emailList.length > 0 ? (
         emailList.map((value) => (
           <Email
@@ -36,7 +38,7 @@ export default function EmailCheckboxes({
   );
 }
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled.div<{ isOpened: boolean }>`
   width: 100%;
   max-height: 20rem;
   overflow-y: scroll;
@@ -44,6 +46,8 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   padding: 5rem 1.6rem 0.4rem 1.6rem;
   background-color: ${WHITE};
+  ${({ isOpened }) =>
+    !isOpened && "height: 0; padding: 4rem 1.6rem 0rem 1.6rem"};
 `;
 
 const Text = styled.p`
