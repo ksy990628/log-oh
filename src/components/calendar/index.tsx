@@ -29,7 +29,9 @@ const Title = styled.h2`
 
 const Wrapper = styled.div`
   width: 100%;
+  min-height: calc(100vh - 5rem);
   display: flex;
   align-items: center;
   flex-direction: column;
+  background: linear-gradient(to right, transparent, white), url("/ewha.jpeg");
 `;
