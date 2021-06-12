@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { GREY } from "@colors";
+
 type PriorityRadiogroupProps = {
   checkedValue: string;
   handlePriorityChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -25,18 +27,28 @@ export default function PriorityRadiogroup({
   ));
 
   return (
-    <InputGroup>
-      <Label htmlFor="priority">Priority</Label>
-      <RadioGroupWrapper>{renderRadioItems}</RadioGroupWrapper>
-    </InputGroup>
+    <Wrapper>
+      <InputGroup>
+        <Label htmlFor="priority">Priority</Label>
+        <RadioGroupWrapper>{renderRadioItems}</RadioGroupWrapper>
+      </InputGroup>
+      <Text>(1: Very Low 2: Low 3: Moderate 4: High 5: Very High)</Text>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  margin-bottom: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
 
 const InputGroup = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
 `;
 
 const Label = styled.label`
@@ -60,4 +72,10 @@ const RadioInput = styled.input``;
 const RadioLabel = styled.label`
   font-size: 1.5rem;
   margin-left: 0.4rem;
+`;
+
+const Text = styled.text`
+  font-size: 1.1rem;
+  color: ${GREY[700]};
+  margin: 0 auto;
 `;
