@@ -14,11 +14,11 @@ export default function Header({ title, isOpened, toggleOpened }: HeaderProps) {
   return (
     <StyledHeader isOpened={isOpened}>
       {isOpened ? (
-        <ChevronButton onClick={toggleOpened}>
+        <ChevronButton type="button" onClick={toggleOpened}>
           <Up style={{ width: "3.6rem", height: "3.6rem" }} fill={WHITE} />
         </ChevronButton>
       ) : (
-        <ChevronButton onClick={toggleOpened}>
+        <ChevronButton type="button" onClick={toggleOpened}>
           <Down style={{ width: "3.6rem", height: "3.6rem" }} fill={WHITE} />
         </ChevronButton>
       )}
