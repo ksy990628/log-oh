@@ -33,7 +33,10 @@ export default function GlobalHeader({ toggleSidebar }: GlobalHeaderProps) {
       {isCreateTodo ? GoBackButton : MenuButton}
       <Link href="/" passHref>
         <A>
-          <Title>Log - Oh</Title>
+          <Title>
+            Log - Oh
+            {pathname !== "/" && ` > ${pathname.substr(1, pathname.length)}`}
+          </Title>
         </A>
       </Link>
     </Wrapper>
